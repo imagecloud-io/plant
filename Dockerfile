@@ -8,6 +8,8 @@ ENV PACKER_VERSION          1.2.3
 ENV PACKER_DOWNLOAD         https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
 ENV PYTHON_PIP_VERSION      10.0.1
 
+ARG tag=unversioned
+
 ADD root /
 
 USER root
@@ -45,7 +47,8 @@ RUN set -ex \
     && chmod +x             /opt/factory/running/* \
     && apt-get clean        \
     && rm -rf               /var/lib/apt/lists \
-    && rm -rf               /root/.cache
+    && rm -rf               /root/.cache \
+    && echo ${tag}          > /opt/container-version
 
 ENTRYPOINT /opt/factory/running/start.sh
 
