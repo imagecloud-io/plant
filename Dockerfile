@@ -29,6 +29,7 @@ RUN set -ex \
                             g++ \
                             make \
                             git \
+                            openssh-client \
                             python \
                             python-dev \
                             unzip \
